@@ -1,0 +1,22 @@
+{
+  "name": "react-native-credit-card-form-ui-example",
+  "displayName": "CreditCardFormUi Example",
+  "expo": {
+    "name": "react-native-credit-card-form-ui-example",
+    "slug": "react-native-credit-card-form-ui-example",
+    "description": "Example app for react-native-credit-card-form-ui",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
