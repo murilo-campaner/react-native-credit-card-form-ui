@@ -1,18 +1,32 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import CreditCardFormUi from 'react-native-credit-card-form-ui';
+import {
+  Button,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Platform,
+} from 'react-native';
+import CreditCard from 'react-native-credit-card-form-ui';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const creditCardRef = React.useRef() as any;
 
-  React.useEffect(() => {
-    CreditCardFormUi.multiply(3, 7).then(setResult);
+  const handleSubmit = React.useCallback(() => {
+    if (creditCardRef.current) {
+      const { error, data } = creditCardRef.current.submit();
+      console.log('ERROR: ', error);
+      console.log('CARD DATA: ', data);
+    }
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={20}
+      style={styles.container}
+    >
+      <CreditCard ref={creditCardRef} />
+      <Button title="Submit" onPress={handleSubmit} />
+    </KeyboardAvoidingView>
   );
 }
 

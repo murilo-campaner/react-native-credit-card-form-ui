@@ -1,6 +1,6 @@
 # react-native-credit-card-form-ui
 
-Another CreditCard Form UI for React Native
+CreditCard Form UI for React Native
 
 ## Installation
 
@@ -11,11 +11,17 @@ npm install react-native-credit-card-form-ui
 ## Usage
 
 ```js
-import CreditCardFormUi from "react-native-credit-card-form-ui";
+import * as React from 'react';
+import { View } from 'react-native';
+import CreditCard from 'react-native-credit-card-form-ui';
 
-// ...
-
-const result = await CreditCardFormUi.multiply(3, 7);
+export default function App() {
+  return (
+    <View>
+      <CreditCard />
+    </View>
+  );
+}
 ```
 
 ## Contributing
