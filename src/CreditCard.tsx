@@ -198,6 +198,10 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
           context: { runtime: false },
         });
         response.isValid = true;
+        setErrors((prev) => ({
+          ...prev,
+          [name]: response.isValid,
+        }));
       } catch (validationError) {
         setErrors((prev) => ({
           ...prev,
@@ -309,11 +313,11 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
     React.useEffect(() => {
       const keys = Object.keys(errors);
       const isValid = keys.reduce((previous: boolean, value: string | any) => {
-        return previous || !(errors as any)[value];
-      }, false);
-      if (cardDataIsValid.current) {
+        return previous && !(errors as any)[value];
+      }, true);
+      if (cardDataIsValid.current !== undefined) {
         if (cardDataIsValid.current !== isValid) {
-          cardDataIsValid.current = !isValid;
+          cardDataIsValid.current = isValid;
           onValidStateChange(cardDataIsValid.current);
         }
       }

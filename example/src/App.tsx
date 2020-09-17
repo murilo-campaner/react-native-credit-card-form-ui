@@ -24,7 +24,7 @@ export default function App() {
       keyboardVerticalOffset={20}
       style={styles.container}
     >
-      <CreditCard ref={creditCardRef} />
+      <CreditCard ref={creditCardRef} onValidStateChange={console.log} />
       <Button title="Submit" onPress={handleSubmit} />
     </KeyboardAvoidingView>
   );
