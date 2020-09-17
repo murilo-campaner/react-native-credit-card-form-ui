@@ -2,7 +2,7 @@
 
 CreditCard Form UI for React Native
 
-![](demo.gif)
+![](https://github.com/murilo-campaner/react-native-credit-card-form-ui/raw/master/demo.gif)
 
 ## Installation
 
