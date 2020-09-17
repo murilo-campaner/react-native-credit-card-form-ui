@@ -2,6 +2,8 @@
 
 CreditCard Form UI for React Native
 
+![](demo.gif)
+
 ## Installation
 
 ```sh
@@ -51,6 +53,13 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+## Roadmap
+- [x] Card data validation
+- [x] Custom background
+- [x] Control keyboard behavior (next, done...)
+- [] Code refactory
+- [] Add brands logos
 
 ## Contributing
 
