@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
 - [ ] Code refactory
 - [ ] Add brands logos
 
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
