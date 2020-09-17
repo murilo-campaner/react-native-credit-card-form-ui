@@ -185,7 +185,12 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
 
     const validateField = React.useCallback((name: string, value: any) => {
       const values: any = { [name]: value };
-      const response = { isPontentiallyValid: false, isValid: false };
+      const response = {
+        isPontentiallyValid: false,
+        isValid: false,
+        error: null,
+      };
+
       try {
         // Check potentially invalid... If has error, it is throwed...
         validationSchema.validateSyncAt(name, values, {
@@ -198,10 +203,6 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
           context: { runtime: false },
         });
         response.isValid = true;
-        setErrors((prev) => ({
-          ...prev,
-          [name]: response.isValid,
-        }));
       } catch (validationError) {
         setErrors((prev) => ({
           ...prev,
@@ -311,17 +312,17 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
     }, [cardData]);
 
     React.useEffect(() => {
-      const keys = Object.keys(errors);
-      const isValid = keys.reduce((previous: boolean, value: string | any) => {
-        return previous && !(errors as any)[value];
-      }, true);
       if (cardDataIsValid.current !== undefined) {
-        if (cardDataIsValid.current !== isValid) {
-          cardDataIsValid.current = isValid;
-          onValidStateChange(cardDataIsValid.current);
+        try {
+          validationSchema.validateSync(cardData, {
+            context: { runtime: false },
+          });
+          onValidStateChange(true);
+        } catch (validationErrors) {
+          onValidStateChange(false, validationErrors);
         }
       }
-    }, [errors, onValidStateChange]);
+    }, [cardData, onValidStateChange]);
 
     React.useImperativeHandle(ref, () => ({ submit }));
 
