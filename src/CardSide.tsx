@@ -14,15 +14,13 @@ const CardSide = ({
 }: any) => {
   const SideBackground = React.useCallback(
     ({ children: child }) => {
-      if (typeof background === 'function') {
-        return background({ children: child });
-      }
-
-      return (
+      return typeof background === 'string' ? (
         // eslint-disable-next-line react-native/no-inline-styles
         <View style={{ borderRadius: 9, backgroundColor: background }}>
           {child}
         </View>
+      ) : (
+        React.cloneElement(background, { children: child })
       );
     },
     [background]
