@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
 - [x] Card data validation
 - [x] Custom background
 - [x] Control keyboard behavior (next, done...)
-- [] Code refactory
-- [] Add brands logos
+- [ ] Code refactory
+- [ ] Add brands logos
 
 ## Contributing
 
