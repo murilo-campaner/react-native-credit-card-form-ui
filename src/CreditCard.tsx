@@ -100,6 +100,7 @@ interface CreditCardProps {
   textColor?: string;
   placeholderTextColor?: string;
   errorTextColor?: string;
+  onValidStateChange?: (cardDataIsValid: boolean) => void;
 }
 
 export interface SubmitResponse {
@@ -123,6 +124,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
       errorTextColor,
       placeholderTextColor,
       initialValues,
+      onValidStateChange,
     }: any,
     ref
   ) => {
@@ -147,6 +149,9 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
     const holderInputRef = React.useRef(null);
     const expirationInputRef = React.useRef(null);
     const cvvInputRef = React.useRef(null);
+
+    /** Other refs */
+    const cardDataIsValid = React.useRef(false);
 
     /** Runtime Styles */
     const textStyle = { color: textColor };
@@ -300,6 +305,19 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
       }
       return response;
     }, [cardData]);
+
+    React.useEffect(() => {
+      const keys = Object.keys(errors);
+      const isValid = keys.reduce((previous: boolean, value: string | any) => {
+        return previous || !(errors as any)[value];
+      }, false);
+      if (cardDataIsValid.current) {
+        if (cardDataIsValid.current !== isValid) {
+          cardDataIsValid.current = !isValid;
+          onValidStateChange(cardDataIsValid.current);
+        }
+      }
+    }, [errors, onValidStateChange]);
 
     React.useImperativeHandle(ref, () => ({ submit }));
 

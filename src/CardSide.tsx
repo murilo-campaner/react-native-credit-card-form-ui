@@ -15,7 +15,6 @@ const CardSide = ({
   const SideBackground = React.useCallback(
     ({ children: child }) => {
       return typeof background === 'string' ? (
-        // eslint-disable-next-line react-native/no-inline-styles
         <View style={{ borderRadius: 9, backgroundColor: background }}>
           {child}
         </View>
