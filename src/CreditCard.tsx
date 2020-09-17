@@ -96,7 +96,7 @@ interface CreditCardProps {
     cvv?: string;
   };
   initialValues?: CardData;
-  background?: any;
+  background?: string | any;
   textColor?: string;
   placeholderTextColor?: string;
   errorTextColor?: string;
@@ -302,8 +302,6 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
     }, [cardData]);
 
     React.useImperativeHandle(ref, () => ({ submit }));
-
-    console.log('render');
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

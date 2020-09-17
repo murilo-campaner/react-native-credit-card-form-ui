@@ -9,25 +9,30 @@ export const CardSideEnum = {
 const CardSide = ({
   children,
   style = [],
-  bgColor = '#612F74',
-  renderBackground,
+  background = '#612F74',
   ...props
 }: any) => {
-  const DefaultBackground: React.FC<{ children: any }> = React.useCallback(
+  const SideBackground = React.useCallback(
     ({ children: child }) => {
-      const bgStyle = { backgroundColor: bgColor, borderRadius: 9 };
-      return <View style={bgStyle}>{child}</View>;
-    },
-    [bgColor]
-  );
+      if (typeof background === 'function') {
+        return background({ children: child });
+      }
 
-  const Background = renderBackground || DefaultBackground;
+      return (
+        // eslint-disable-next-line react-native/no-inline-styles
+        <View style={{ borderRadius: 9, backgroundColor: background }}>
+          {child}
+        </View>
+      );
+    },
+    [background]
+  );
 
   return (
     <Animated.View style={[styles.sideWrapper, ...style]} {...props}>
-      <Background>
+      <SideBackground>
         <View style={styles.container}>{children}</View>
-      </Background>
+      </SideBackground>
     </Animated.View>
   );
 };
