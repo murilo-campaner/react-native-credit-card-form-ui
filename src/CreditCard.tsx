@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   PixelRatio,
+  Dimensions,
 } from 'react-native';
 
 // import CreditCardType from 'credit-card-type';
@@ -507,8 +508,8 @@ CreditCard.defaultProps = {
 const styles = StyleSheet.create({
   cardWrapper: {
     position: 'relative',
-    width: 360,
-    height: 214,
+    width: Dimensions.get('screen').width,
+    maxWidth: '100%',
     shadowColor: 'rgba(0,0,0,0.6)',
     shadowOffset: {
       width: 0,
@@ -516,7 +517,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.37,
     shadowRadius: 7.49,
-    elevation: 12,
     borderRadius: 6,
     justifyContent: 'center',
     alignItems: 'center',
