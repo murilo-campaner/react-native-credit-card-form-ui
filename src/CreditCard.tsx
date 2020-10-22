@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  PixelRatio,
 } from 'react-native';
 
 // import CreditCardType from 'credit-card-type';
@@ -532,15 +533,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   textLabel: {
-    fontSize: 10,
+    fontSize: 10 / PixelRatio.getFontScale(),
     textTransform: 'uppercase',
   },
   textData: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 16 / PixelRatio.getFontScale(),
   },
   textCardNumber: {
-    fontSize: 20,
+    fontSize: 20 / PixelRatio.getFontScale(),
     fontWeight: 'bold',
     marginBottom: 8,
     marginTop: 16,
