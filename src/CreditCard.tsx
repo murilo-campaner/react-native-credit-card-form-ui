@@ -13,7 +13,6 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   PixelRatio,
-  Dimensions,
 } from 'react-native';
 
 // import CreditCardType from 'credit-card-type';
