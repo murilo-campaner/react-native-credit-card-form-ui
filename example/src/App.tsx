@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   StyleSheet,
   Platform,
+  View,
 } from 'react-native';
 import CreditCard from 'react-native-credit-card-form-ui';
 

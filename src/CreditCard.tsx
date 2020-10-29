@@ -88,6 +88,7 @@ interface CardData {
   holder?: string;
   expiration?: string;
   cvv?: string;
+  brand?: string;
 }
 
 interface CreditCardProps {
@@ -229,6 +230,11 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
         lengths = [],
         niceType = '',
       } = card;
+
+      setCardData((prev: any) => ({
+        ...prev,
+        brand: type,
+      }));
 
       setCardConfig((prev: any) => {
         const maxLength = Math.max(...lengths);
@@ -501,15 +507,18 @@ CreditCard.defaultProps = {
     holder: '',
     expiration: '',
     cvv: '',
+    brand: '',
   },
   errorTextColor: '#F15A5B',
 };
 
 const styles = StyleSheet.create({
   cardWrapper: {
+    height: '100%',
+    maxHeight: 220,
     position: 'relative',
-    width: Dimensions.get('screen').width,
-    maxWidth: '100%',
+    width: '100%',
+    maxWidth: 350,
     shadowColor: 'rgba(0,0,0,0.6)',
     shadowOffset: {
       width: 0,
