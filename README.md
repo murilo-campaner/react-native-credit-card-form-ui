@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
 |**`labels`**| Labels used above card inputs | *object* | { holder: 'TITULAR DO CARTÃO', expiration: 'VENCIMENTO', cvv: 'CÓD. SEGURANÇA' } |
 |**`expirationDateFormat`**| Card expiration date format. Can be `MM/YYYY` or `MM/YY` | *string* | MM/YYYY |
 |**`initialValues`**| Initial values of inputs | `CardData` | { number: '', holder: '', expiration: '', cvv: '', brand: ''}
-|
 |**`background`**| Credit card background. It can be a string (HEX / RGB) or a React element (like [LinearGradient](https://docs.expo.io/versions/latest/sdk/linear-gradient/) for example) | `string` or `React.Component`. If it's an `React.Component`, the component will receive the card content as children.  | #612F74 |
 |**`textColor`**| Label colors | `string` | #FFFFFF |
 |**`placeholderTextColor`**| Placeholder color (normal state) | `string`  | #9B84A9 |
