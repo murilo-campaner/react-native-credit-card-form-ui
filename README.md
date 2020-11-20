@@ -54,6 +54,29 @@ const styles = StyleSheet.create({
 });
 ```
 
+## Component API
+### Basic Props
+
+| Prop | Description | Type | Default |
+|---|---|---|---|
+|**`placeholders`**| Placeholders used in card inputs |*object*| { number: '0000 0000 0000 0000', holder: 'TITULAR DO CARTÃO', expiration: 'MM/YYYY', cvv: '000' } |
+|**`labels`**| Labels used above card inputs | *object* | { holder: 'TITULAR DO CARTÃO', expiration: 'VENCIMENTO', cvv: 'CÓD. SEGURANÇA' } |
+|**`expirationDateFormat`**| Card expiration date format. Can be `MM/YYYY` or `MM/YY` | *string* | MM/YYYY |
+|**`initialValues`**| Initial values of inputs | `CardData` | { number: '', holder: '', expiration: '', cvv: '', brand: ''}
+|
+|**`background`**| Credit card background. It can be a string (HEX / RGB) or a React element (like [LinearGradient](https://docs.expo.io/versions/latest/sdk/linear-gradient/) for example) | `string` or `React.Component`. If it's an `React.Component`, the component will receive the card content as children.  | #612F74 |
+|**`textColor`**| Label colors | `string` | #FFFFFF |
+|**`placeholderTextColor`**| Placeholder color (normal state) | `string`  | #9B84A9 |
+|**`errorTextColor`**| Placeholder color (error state) | `string` | #F15A5B |
+|**`onValidStateChange`**| Called when card valid state changes (`true` or `false`) | `func` |(validCard) => null|
+
+### Methods (Imperative API):
+
+| Method | Description |
+|---|---|
+|**`submit`**| Submit form, validate fields and return an response like this: `{ error: null, data: cardData }`.
+
+
 ## Roadmap
 - [x] Card data validation
 - [x] Custom background
