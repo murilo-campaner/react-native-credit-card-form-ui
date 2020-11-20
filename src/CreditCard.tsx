@@ -97,6 +97,12 @@ interface CreditCardProps {
     expiration?: string;
     cvv?: string;
   };
+  labels?: {
+    holder?: string;
+    expiration?: string;
+    cvv?: string;
+  };
+  expirationDateFormat?: 'MM/YYYY' | 'MM/YY';
   initialValues?: CardData;
   background?: string | any;
   textColor?: string;
@@ -121,11 +127,13 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
   (
     {
       placeholders,
+      labels,
       background,
       textColor,
       errorTextColor,
       placeholderTextColor,
       initialValues,
+      expirationDateFormat,
       onValidStateChange,
     }: any,
     ref
@@ -184,6 +192,9 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
         setActiveSide(newActiveSide);
       });
     }, [activeSide, backOpacityRef, frontOpacityRef, rotationValue]);
+
+    const expirationMask =
+      expirationDateFormat === 'MM/YY' ? '99/99' : '99/9999';
 
     const validateField = React.useCallback((name: string, value: any) => {
       const values: any = { [name]: value };
@@ -396,7 +407,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
             <View style={styles.footer}>
               <View style={styles.holderWrapper}>
                 <Text style={[styles.textLabel, textStyle]}>
-                  TITULAR DO CARTÃO
+                  {labels.holder}
                 </Text>
                 <CardInput
                   placeholderTextColor={placeholderTextColor}
@@ -418,7 +429,9 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                 />
               </View>
               <View style={styles.expirationWrapper}>
-                <Text style={[styles.textLabel, textStyle]}>VENCIMENTO</Text>
+                <Text style={[styles.textLabel, textStyle]}>
+                  {labels.expiration}
+                </Text>
                 <CardInput
                   placeholderTextColor={placeholderTextColor}
                   name="expiration"
@@ -431,7 +444,8 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                     styles.textData,
                     {
                       color:
-                        errors.expiration && cardData.expiration.length === 7
+                        errors.expiration &&
+                        cardData.expiration.length === expirationMask.length
                           ? errorTextColor
                           : textColor,
                     },
@@ -440,7 +454,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                   maxLength={7}
                   maskProps={{
                     type: 'custom',
-                    options: { mask: '99/9999' },
+                    options: { mask: expirationMask },
                   }}
                   refInput={expirationInputRef}
                   onSubmitEditing={() => {
@@ -462,7 +476,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
               <Image source={Images.icons.rotate} />
             </TouchableOpacity>
             <View style={styles.cvvWrapper} pointerEvents="box-none">
-              <Text style={[styles.textLabel, textStyle]}>Cód. Segurança</Text>
+              <Text style={[styles.textLabel, textStyle]}>{labels.cvv}</Text>
               <CardInput
                 placeholderTextColor={placeholderTextColor}
                 name="cvv"
@@ -499,6 +513,12 @@ CreditCard.defaultProps = {
     expiration: 'MM/YYYY',
     cvv: '000',
   },
+  labels: {
+    holder: 'TITULAR DO CARTÃO',
+    expiration: 'VENCIMENTO',
+    cvv: 'CÓD. SEGURANÇA',
+  },
+  expirationDateFormat: 'MM/YYYY',
   textColor: '#FFFFFF',
   placeholderTextColor: '#9B84A9',
   initialValues: {
