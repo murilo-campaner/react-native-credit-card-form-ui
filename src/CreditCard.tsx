@@ -279,12 +279,16 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
           if (isValid) {
             focusField(holderInputRef);
           }
-        } else if (name === 'expiration' && isValid && text.length === 7) {
+        } else if (
+          name === 'expiration' &&
+          isValid &&
+          text.length === expirationMask.length
+        ) {
           focusField(cvvInputRef);
           rotate();
         }
       },
-      [validateField, rotate]
+      [validateField, rotate, expirationMask]
     );
 
     const getSideStyle = React.useCallback(
