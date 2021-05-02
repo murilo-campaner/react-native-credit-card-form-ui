@@ -533,6 +533,7 @@ CreditCard.defaultProps = {
     brand: '',
   },
   errorTextColor: '#F15A5B',
+  onValidStateChange: () => {},
 };
 
 const styles = StyleSheet.create({
