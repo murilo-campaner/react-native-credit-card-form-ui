@@ -142,10 +142,12 @@
   },
   "dependencies": {
     "@types/yup": "^0.29.7",
+    "caniuse-lite": "^1.0.30001219",
     "card-validator": "^8.1.0",
     "credit-card-type": "^9.0.1",
     "react-native-animatable": "^1.3.3",
     "react-native-masked-text": "^1.13.0",
+    "react-native-slick": "^1.6.0",
     "yup": "^0.29.3"
   }
 }
