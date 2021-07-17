@@ -79,7 +79,7 @@ const Images: any = {
 };
 
 export type CreditCardType = {
-  submit: () => void;
+  submit: () => {error: Error | null, data: CardData};
 };
 
 interface CardData {
