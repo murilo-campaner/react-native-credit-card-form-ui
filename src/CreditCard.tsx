@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   PixelRatio,
+  Platform,
 } from 'react-native';
 
 // import CreditCardType from 'credit-card-type';
@@ -79,7 +80,7 @@ const Images: any = {
 };
 
 export type CreditCardType = {
-  submit: () => void;
+  submit: () => { error: Error | null; data: CardData };
 };
 
 interface CardData {
@@ -572,19 +573,21 @@ const styles = StyleSheet.create({
   textData: {
     fontWeight: 'bold',
     fontSize: 16 / PixelRatio.getFontScale(),
+    marginTop: Platform.OS == 'android' ? -10 : undefined,
+    marginLeft: Platform.OS == 'android' ? -4 : undefined,
   },
   textCardNumber: {
     fontSize: 20 / PixelRatio.getFontScale(),
     fontWeight: 'bold',
     marginBottom: 8,
-    marginTop: 16,
+    marginTop: Platform.OS == 'ios' ? 16 : 5,
     letterSpacing: 2,
   },
   imageChip: {
     marginTop: 16,
   },
   footer: {
-    marginTop: 16,
+    marginTop: Platform.OS == 'ios' ? 16 : 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
