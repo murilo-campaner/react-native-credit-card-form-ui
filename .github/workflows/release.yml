@@ -25,7 +25,7 @@ jobs:
     - name: Lint
       run: |
         npm install
-        npm run lint
+        npm run lint --fix
     
     - name: Build
       run: |
