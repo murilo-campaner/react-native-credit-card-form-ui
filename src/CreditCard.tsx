@@ -406,6 +406,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                 autoCorrect={false}
                 onSubmitEditing={() => focusField(holderInputRef)}
                 blurOnSubmit={false}
+                keyboardType="numeric"
               />
             </View>
 
