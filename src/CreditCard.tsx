@@ -103,6 +103,12 @@ interface CreditCardProps {
     expiration?: string;
     cvv?: string;
   };
+  readOnly?: {
+    number?: boolean;
+    holder?: boolean;
+    expiration?: boolean;
+    cvv?: boolean;
+  };
   expirationDateFormat?: 'MM/YYYY' | 'MM/YY';
   initialValues?: CardData;
   background?: string | any;
@@ -136,6 +142,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
       initialValues,
       expirationDateFormat,
       onValidStateChange,
+      readOnly,
     }: any,
     ref
   ) => {
@@ -387,6 +394,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                 placeholderTextColor={placeholderTextColor}
                 name="number"
                 onChange={handleInputChange}
+                editable={!readOnly?.number}
                 value={cardData?.number}
                 autoFocus
                 placeholder={placeholders.number}
@@ -422,6 +430,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                   textContentType="name"
                   returnKeyType="next"
                   onChange={handleInputChange}
+                  editable={!readOnly?.holder}
                   placeholder={placeholders.holder}
                   autoCapitalize="characters"
                   style={[
@@ -445,6 +454,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                   keyboardType="numbers-and-punctuation"
                   returnKeyType="next"
                   onChange={handleInputChange}
+                  editable={!readOnly?.expiration}
                   placeholder={placeholders.expiration}
                   style={[
                     styles.textData,
@@ -491,6 +501,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                 returnKeyType="done"
                 onChange={handleInputChange}
                 placeholder={placeholders.cvv}
+                editable={!readOnly?.cvv}
                 style={[
                   styles.textData,
                   { color: errors.cvv ? errorTextColor : textColor },
