@@ -63,7 +63,7 @@ const validationSchema = yup.object().shape({
     .defined()
     .test('is-valid-cvv', 'Card CVV is invalid', function (cvv: any) {
       const { runtime = false } = this.options.context as any;
-      const { isPotentiallyValid, isValid } = cardValidator.cvv(cvv);
+      const { isPotentiallyValid, isValid } = cardValidator.cvv(cvv, [3, 4]);
       return runtime ? isPotentiallyValid : isValid;
     }),
 });
@@ -263,6 +263,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
         const numberMask = maskChars.join('');
 
         const cvvMask = ''.padStart(code.size, '9');
+        console.log(type);
         const brandImage = Images.brands[type]
           ? Images.brands[type]
           : Images.brands.default;
