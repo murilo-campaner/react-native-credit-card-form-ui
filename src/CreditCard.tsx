@@ -27,6 +27,7 @@ const validationSchema = yup.object().shape({
   holder: yup
     .string()
     .defined()
+    .max(24)
     .test('is-valid-holder', 'Holder name is invalid', function (
       holderName: any
     ) {
@@ -438,6 +439,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                     styles.textData,
                     { color: errors.holder ? errorTextColor : textColor },
                   ]}
+                  maxLength={24}
                   value={cardData?.holder}
                   refInput={holderInputRef}
                   onSubmitEditing={() => focusField(expirationInputRef)}
