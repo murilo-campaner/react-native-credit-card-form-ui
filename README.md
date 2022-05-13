@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
 |**`placeholderTextColor`**| Placeholder color (normal state) | `string`  | #9B84A9 |
 |**`errorTextColor`**| Placeholder color (error state) | `string` | #F15A5B |
 |**`onValidStateChange`**| Called when card valid state changes (`true` or `false`) | `func` |(validCard) => null|
+|**`readOnly`**| Makes card inputs not editable (optional, and each field is optional) | *object* | { number: false, holder: false, expiration: false, cvv: false } |
 
 ### Methods (Imperative API):
 

@@ -27,6 +27,7 @@ const validationSchema = yup.object().shape({
   holder: yup
     .string()
     .defined()
+    .max(24)
     .test('is-valid-holder', 'Holder name is invalid', function (
       holderName: any
     ) {
@@ -63,7 +64,7 @@ const validationSchema = yup.object().shape({
     .defined()
     .test('is-valid-cvv', 'Card CVV is invalid', function (cvv: any) {
       const { runtime = false } = this.options.context as any;
-      const { isPotentiallyValid, isValid } = cardValidator.cvv(cvv);
+      const { isPotentiallyValid, isValid } = cardValidator.cvv(cvv, [3, 4]);
       return runtime ? isPotentiallyValid : isValid;
     }),
 });
@@ -103,6 +104,12 @@ interface CreditCardProps {
     expiration?: string;
     cvv?: string;
   };
+  readOnly?: {
+    number?: boolean;
+    holder?: boolean;
+    expiration?: boolean;
+    cvv?: boolean;
+  };
   expirationDateFormat?: 'MM/YYYY' | 'MM/YY';
   initialValues?: CardData;
   background?: string | any;
@@ -136,6 +143,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
       initialValues,
       expirationDateFormat,
       onValidStateChange,
+      readOnly,
     }: any,
     ref
   ) => {
@@ -256,6 +264,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
         const numberMask = maskChars.join('');
 
         const cvvMask = ''.padStart(code.size, '9');
+        console.log(type);
         const brandImage = Images.brands[type]
           ? Images.brands[type]
           : Images.brands.default;
@@ -387,6 +396,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                 placeholderTextColor={placeholderTextColor}
                 name="number"
                 onChange={handleInputChange}
+                editable={!readOnly?.number}
                 value={cardData?.number}
                 autoFocus
                 placeholder={placeholders.number}
@@ -422,12 +432,14 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                   textContentType="name"
                   returnKeyType="next"
                   onChange={handleInputChange}
+                  editable={!readOnly?.holder}
                   placeholder={placeholders.holder}
                   autoCapitalize="characters"
                   style={[
                     styles.textData,
                     { color: errors.holder ? errorTextColor : textColor },
                   ]}
+                  maxLength={24}
                   value={cardData?.holder}
                   refInput={holderInputRef}
                   onSubmitEditing={() => focusField(expirationInputRef)}
@@ -445,6 +457,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                   keyboardType="numbers-and-punctuation"
                   returnKeyType="next"
                   onChange={handleInputChange}
+                  editable={!readOnly?.expiration}
                   placeholder={placeholders.expiration}
                   style={[
                     styles.textData,
@@ -491,6 +504,7 @@ const CreditCard = React.forwardRef<CreditCardType, CreditCardProps>(
                 returnKeyType="done"
                 onChange={handleInputChange}
                 placeholder={placeholders.cvv}
+                editable={!readOnly?.cvv}
                 style={[
                   styles.textData,
                   { color: errors.cvv ? errorTextColor : textColor },
